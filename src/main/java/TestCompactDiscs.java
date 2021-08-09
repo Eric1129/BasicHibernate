@@ -20,13 +20,6 @@ public class TestCompactDiscs {
         System.out.println(disc.getTitle());
 
         em.clear();
-
-        disc.setTitle("A Rush of Blood to the Head");
-        //disc.setTitle("Mylo Xyloto");
-
-
-        Query allSpiceGirlsTracks = em.createQuery("select t.title from Track t where t.cdId  = 16");
-        allSpiceGirlsTracks.getResultList().forEach(System.out::println);
         tx.commit();
         em.close();
 
