@@ -2,6 +2,8 @@ package com.conygre.training.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity @Table(name="compact_discs")
 public class CompactDisc implements Serializable {
@@ -17,8 +19,27 @@ public class CompactDisc implements Serializable {
     @Column(name="title") private String title;
     @Column(name="artist") private String artist;
     @Column(name="price") private Double price;
+    @Column(name="tracks") private Integer tracks;
+
+    public List<Track> getTrackTitles() {
+        return trackTitles;
+    }
+
+    public void setTrackTitles(List<Track> trackTitles) {
+        this.trackTitles = trackTitles;
+    }
+
+    @JoinColumn(name="id", referencedColumnName = "id")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Track> trackTitles = new ArrayList<Track>();
 
     public CompactDisc() {
+    }
+    public CompactDisc(String t, double p, String a, int tr) {
+        title = t;
+        price = p;
+        artist = a;
+        tracks = tr;
     }
 
     public Integer getId() {
